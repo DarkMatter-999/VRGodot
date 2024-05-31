@@ -1,6 +1,5 @@
 extends Node3D
 
-
 var task: MediaPipeHandLandmarker
 var task_file := "res://tasks/hand_landmarker.task"
 
@@ -89,7 +88,7 @@ func process_camera_frame(image: MediaPipeImage, timestamp_ms: int) -> void:
 func start_camera() -> void:
 	reset()
 	camera_helper.set_mirrored(false)
-	camera_helper.start(cam_selection, Vector2(1280, 720))
+	camera_helper.start(cam_selection, Vector2(640, 480))
 
 func reset() -> void:
 	video_player.stop()

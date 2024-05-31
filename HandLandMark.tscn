@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://r7afldtbapmq"]
+
+[ext_resource type="Script" path="res://HandLandMark.gd" id="1_i2e0l"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_0evdu"]
+
+[node name="HandLandMark" type="Node3D"]
+script = ExtResource("1_i2e0l")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1151.0
+offset_bottom = 652.0
+
+[node name="Image" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 651.0
+texture = SubResource("ImageTexture_0evdu")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Back" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = -2.0
+offset_top = 596.0
+offset_right = 96.0
+offset_bottom = 649.0
+text = "Back"
+
+[node name="CamSelect" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 596.0
+offset_right = 194.0
+offset_bottom = 649.0
+text = "CamSelect"
+
+[node name="CameraPermission" type="AcceptDialog" parent="."]
+
+[node name="Video" type="VideoStreamPlayer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

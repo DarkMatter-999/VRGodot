@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://jxbfn83loiu5"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_h6k8f"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgdtr"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_h6k8f")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1151.0
+offset_bottom = 652.0
+
+[node name="Back" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = -2.0
+offset_top = 596.0
+offset_right = 96.0
+offset_bottom = 649.0
+text = "Back"
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = 99.0
+offset_top = 595.0
+offset_right = 197.0
+offset_bottom = 648.0
+text = "Start"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.92557)
+mesh = SubResource("BoxMesh_mgdtr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29183, -1.73093)

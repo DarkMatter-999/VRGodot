@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://jxbfn83loiu5"]
+[gd_scene load_steps=5 format=3 uid="uid://jxbfn83loiu5"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_h6k8f"]
+[ext_resource type="PackedScene" uid="uid://cnhq4jefw1ccj" path="res://player.tscn" id="2_2nk8a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgdtr"]
 
+[sub_resource type="Environment" id="Environment_pf3xo"]
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_h6k8f")
+
+[node name="player" parent="." instance=ExtResource("2_2nk8a")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -20,17 +25,18 @@ offset_right = 576.0
 offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Back" type="Button" parent="Control"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -56.0
+anchors_preset = -1
+anchor_top = 0.99537
+anchor_bottom = 0.99537
+offset_top = -53.0
 offset_right = 98.0
-offset_bottom = -3.0
 grow_vertical = 0
 text = "Back"
+metadata/_edit_use_anchors_ = true
 
 [node name="Start" type="Button" parent="Control"]
 layout_mode = 1
@@ -43,8 +49,7 @@ offset_right = 202.0
 offset_bottom = -3.0
 grow_vertical = 0
 text = "Start"
-
-[node name="Camera3D" type="Camera3D" parent="."]
+metadata/_edit_use_anchors_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.92557)
@@ -52,3 +57,7 @@ mesh = SubResource("BoxMesh_mgdtr")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29183, -1.73093)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pf3xo")

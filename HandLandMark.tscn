@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://r7afldtbapmq"]
+[gd_scene load_steps=4 format=3 uid="uid://r7afldtbapmq"]
 
 [ext_resource type="Script" path="res://HandLandMark.gd" id="1_i2e0l"]
+[ext_resource type="PackedScene" uid="uid://vvh6kbsviuv5" path="res://Hand.tscn" id="2_ppiqm"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_0evdu"]
 
 [node name="HandLandMark" type="Node3D"]
 script = ExtResource("1_i2e0l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="LeftHand" parent="." instance=ExtResource("2_ppiqm")]
+
+[node name="RightHand" parent="." instance=ExtResource("2_ppiqm")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -14,8 +23,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Image" type="TextureRect" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ImageTexture_0evdu")
-expand_mode = 2
-stretch_mode = 4
+stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Back" type="Button" parent="Control"]
@@ -61,3 +71,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0429)

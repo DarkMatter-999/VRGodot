@@ -6,6 +6,9 @@ var task_file := "res://tasks/hand_landmarker.task"
 @onready var image_view: TextureRect = $Control/Image
 @onready var btn_back: Button = $Control/Back
 @onready var btn_switch: Button = $Control/CamSelect
+@onready var lhand = $LeftHand
+@onready var rhand = $RightHand
+
 var main_scene := preload("res://Main.tscn")
 var cam_selection := MediaPipeCameraHelper.FACING_FRONT
 var running_mode := MediaPipeTask.RUNNING_MODE_IMAGE
@@ -101,20 +104,38 @@ func update_image(image: Image) -> void:
 		image_view.texture.call_deferred("set_image", image)
 
 func show_result(image: Image, result: MediaPipeHandLandmarkerResult) -> void:
-	for landmarks in result.hand_landmarks:
-		draw_landmarks(image, landmarks)
-	var handedness_text := ""
-	for categories in result.handedness:
-		for category in categories.categories:
-			handedness_text += "%s\n" % [category.display_name]
-	#lbl_handedness.call_deferred("set_text", handedness_text)
-	update_image(image)
+	call_deferred("move_points", result)
+	#for landmarks in result.hand_landmarks:
+		#draw_landmarks(image, landmarks)
+	#var handedness_text := ""
+	#for categories in result.handedness:
+		#for category in categories.categories:
+			#handedness_text += "%s\n" % [category.display_name]
+	##lbl_handedness.call_deferred("set_text", handedness_text)
+	#update_image(image)
 
 func draw_landmarks(image: Image, landmarks: MediaPipeNormalizedLandmarks) -> void:
 	var color := Color.GREEN
 	var rect := Image.create(4, 4, false, image.get_format())
 	rect.fill(color)
 	var image_size := Vector2(image.get_size())
+
 	for landmark in landmarks.landmarks:
 		var pos := Vector2(landmark.x, landmark.y)
 		image.blit_rect(rect, rect.get_used_rect(), Vector2i(image_size * pos) - rect.get_size() / 2)
+
+func move_points(result: MediaPipeHandLandmarkerResult) -> void:
+	for i in range(len(result.hand_landmarks)):
+		for hand in result.handedness[i].categories:
+			if hand.display_name == "Left":
+				var j = 0
+				for k in result.hand_landmarks[i].landmarks:
+					var point = lhand.get_child(j)
+					j += 1
+					point.global_transform.origin = Vector3(k.x*5-2.5,-k.y*5+2.5,k.z*5-2.5)
+			elif hand.display_name == "Right":
+				var j = 0
+				for k in result.hand_landmarks[i].landmarks:
+					var point = rhand.get_child(j)
+					j += 1
+					point.global_transform.origin = Vector3(k.x*5-2.5,-k.y*5+2.5,k.z*5-2.5)
